@@ -1,9 +1,9 @@
 import LayoutAdmin from "@/components/layout-admin";
 
-export default function SaleStaff() {
+export default function ConsultingStaff() {
     return (
         <LayoutAdmin>
-            <h1>Sale Staff</h1>
+            <h1>Consulting Staff</h1>
         </LayoutAdmin>
     );
 }

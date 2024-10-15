@@ -11,9 +11,11 @@ import { HomepageComponent } from "./pages/home/homepage";
 import KoiPage from "./pages/mykoi";
 import KoiDetailPage from "./pages/detailFish";
 import KoiPayPage from "./pages/paykoi";
-import ConsultingStaff from "./pages/ConsultingStaff/ConsultingStaff";
 import SaleStaff from "./pages/SaleStaff/SaleStaff";
 import CustomerRequest from "./pages/SaleStaff/CustomerRequest";
+import ConsultingStaff from "./pages/Consulting-Staff/ConsultingStaff";
+import DeliveryStaff from "./pages/Delivery-Staff/Delivery-Staff";
+
 // import "../src/styles/App.css";
 
 function App() {
@@ -33,11 +35,12 @@ function App() {
                 { path: "/mykoi", element: <KoiPage /> },
                 { path: "/mykoi/:id", element: <KoiDetailPage /> },
                 { path: "/paykoi", element: <KoiPayPage /> },
-                { path: "/consulting", element: <ConsultingStaff /> },
-                { path: "/sale", element: <SaleStaff /> },
-                { path: "/CustomerRequest", element: <CustomerRequest /> },
             ],
         },
+        { path: "/consulting-staff", element: <ConsultingStaff /> },
+        { path: "/sale-staff", element: <SaleStaff /> },
+        { path: "/customer-request", element: <CustomerRequest /> },
+        { path: "/delivery-staff", element: <DeliveryStaff /> },
     ]);
     return <RouterProvider router={router} />;
 }
