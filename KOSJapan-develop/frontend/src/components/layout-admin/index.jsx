@@ -25,22 +25,17 @@ const LayoutAdmin = ({ children }) => {
             {
                 key: "/sale-staff",
                 icon: <HomeOutlined />,
-                label: <Link to="/sale-staff">Home</Link>,
-            },
-            {
-                key: "/customer-request",
-                icon: <UnorderedListOutlined />,
-                label: <Link to="/customer-request">Customer Request</Link>,
+                label: <Link to="/sale-staff">Sale Staff</Link>,
             },
             {
                 key: "/consulting-staff",
                 icon: <SolutionOutlined />,
-                label: <Link to="/consulting-staff">Consulting-staff</Link>,
+                label: <Link to="/consulting-staff">Consulting Staff</Link>,
             },
             {
                 key: "/delivery-staff",
                 icon: <TruckOutlined />,
-                label: <Link to="/delivery-staff">Delivery-staff</Link>,
+                label: <Link to="/delivery-staff">Delivery Staff</Link>,
             },
             {
                 key: "logout",
@@ -64,7 +59,7 @@ const LayoutAdmin = ({ children }) => {
                 <Menu
                     theme="dark"
                     mode="inline"
-                    selectedKeys={[currentPath]} // Đặt selectedKeys dựa theo route hiện tại
+                    selectedKeys={[currentPath]}
                     items={menuItems}
                 />
             </Sider>

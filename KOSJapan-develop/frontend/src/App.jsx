@@ -15,8 +15,10 @@ import SaleStaff from "./pages/SaleStaff/SaleStaff";
 import CustomerRequest from "./pages/SaleStaff/CustomerRequest";
 import ConsultingStaff from "./pages/Consulting-Staff/ConsultingStaff";
 import DeliveryStaff from "./pages/Delivery-Staff/Delivery-Staff";
-
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // import "../src/styles/App.css";
+
+const queryClient = new QueryClient();
 
 function App() {
     const router = createBrowserRouter([
@@ -39,10 +41,14 @@ function App() {
         },
         { path: "/consulting-staff", element: <ConsultingStaff /> },
         { path: "/sale-staff", element: <SaleStaff /> },
-        { path: "/customer-request", element: <CustomerRequest /> },
         { path: "/delivery-staff", element: <DeliveryStaff /> },
     ]);
-    return <RouterProvider router={router} />;
+
+    return (
+        <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+        </QueryClientProvider>
+    );
 }
 
 export default App;
