@@ -6,5 +6,10 @@ import { useGetBooking } from "@/query/BookingQuery";
 export default function SaleStaff() {
     const { data } = useGetBooking();
 
-    return <LayoutAdmin>{data && <BookingTable data={data} />}</LayoutAdmin>;
+    return (
+        <LayoutAdmin>
+            <h1 className="font-bold mb-10">Booking Customer</h1>
+            {data && <BookingTable data={data} />}
+        </LayoutAdmin>
+    );
 }

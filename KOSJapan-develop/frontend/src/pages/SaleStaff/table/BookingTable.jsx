@@ -6,7 +6,6 @@ import UpdateStatusModal from "../modal/UpdateStatusModal";
 const BookingTable = ({ data, onStatusUpdate }) => {
     const [selectedTrip, setSelectedTrip] = useState(null);
     const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
-
     const [selectedBooking, setSelectedBooking] = useState(null);
     const [isUpdateStatusModalOpen, setIsUpdateStatusModalOpen] =
         useState(false);
@@ -44,22 +43,22 @@ const BookingTable = ({ data, onStatusUpdate }) => {
             {
                 Header: "Actions",
                 Cell: ({ row }) => (
-                    <div>
+                    <div className="flex space-x-2">
                         <button
                             onClick={() => {
                                 setSelectedTrip(row.original);
                                 setIsDetailModalOpen(true);
                             }}
-                            className="bg-blue-500 text-white px-3 py-2 rounded mr-2"
+                            className="bg-blue-500 text-white px-3 py-2 rounded hover:bg-blue-600"
                         >
                             Xem chi tiết
                         </button>
                         <button
                             onClick={() => {
-                                setSelectedBooking(row.original); // Lưu booking được chọn
-                                setIsUpdateStatusModalOpen(true); // Mở modal cập nhật trạng thái
+                                setSelectedBooking(row.original);
+                                setIsUpdateStatusModalOpen(true);
                             }}
-                            className="bg-yellow-500 text-white px-3 py-2 rounded"
+                            className="bg-yellow-500 text-white px-3 py-2 rounded hover:bg-yellow-600"
                         >
                             Cập nhật trạng thái
                         </button>
@@ -77,21 +76,15 @@ const BookingTable = ({ data, onStatusUpdate }) => {
         <div>
             <table
                 {...getTableProps()}
-                style={{ border: " solid 1px blue" }}
-                className="w-full"
+                className="min-w-full bg-white shadow-md rounded-lg overflow-hidden"
             >
-                <thead>
+                <thead className="bg-gray-800 text-white">
                     {headerGroups.map((headerGroup) => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map((column) => (
                                 <th
                                     {...column.getHeaderProps()}
-                                    style={{
-                                        borderBottom: "solid 3px red",
-                                        background: "aliceblue",
-                                        color: "black",
-                                        fontWeight: "bold",
-                                    }}
+                                    className="py-3 px-4 text-left text-sm font-medium"
                                 >
                                     {column.render("Header")}
                                 </th>
@@ -103,15 +96,14 @@ const BookingTable = ({ data, onStatusUpdate }) => {
                     {rows.map((row) => {
                         prepareRow(row);
                         return (
-                            <tr {...row.getRowProps()}>
+                            <tr
+                                {...row.getRowProps()}
+                                className="hover:bg-gray-100"
+                            >
                                 {row.cells.map((cell) => (
                                     <td
                                         {...cell.getCellProps()}
-                                        style={{
-                                            padding: "10px",
-                                            border: "solid 1px gray",
-                                            background: "papayawhip",
-                                        }}
+                                        className="border border-gray-400 bg-papayawhip p-2"
                                     >
                                         {cell.render("Cell")}
                                     </td>
@@ -130,7 +122,6 @@ const BookingTable = ({ data, onStatusUpdate }) => {
                 />
             )}
 
-            {/* Hiển thị modal cập nhật trạng thái */}
             {selectedBooking && (
                 <UpdateStatusModal
                     isOpen={isUpdateStatusModalOpen}
