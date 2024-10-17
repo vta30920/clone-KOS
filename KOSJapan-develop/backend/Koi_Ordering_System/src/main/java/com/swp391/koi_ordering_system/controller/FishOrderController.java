@@ -42,10 +42,10 @@ public class FishOrderController {
         return ResponseEntity.ok(orderService.getFishOrderByBookingIdAndFarmId(booking_id, farm_id));
     }
 
-    @PostMapping("/{booking_id}/create")
+    @PostMapping("/{booking_id}/{farm_id}/create")
     public ResponseEntity<FishOrderDTO> createFishOrder(@PathVariable String booking_id,
-                                                    @RequestBody CreateOrderDTO createOrderDTO) {
-        FishOrder newOrder = orderService.createFishOrder(booking_id, createOrderDTO);
+                                                    @PathVariable String farm_id, @RequestBody CreateOrderDTO dto) {
+        FishOrder newOrder = orderService.createFishOrder(booking_id, farm_id, dto);
         return ResponseEntity.ok(orderService.mapToDTO2(newOrder));
     }
 
@@ -58,11 +58,11 @@ public class FishOrderController {
     }
 
 
-    @PutMapping("/{booking_id}/{farm_id}/add-order-detail-to-order")
+    @PutMapping("/{booking_id}/{farm_id}/{FishOrderDetailId_Or_FishPackOrderDetailId}/add-order-detail-to-order")
     public ResponseEntity<FishOrderDTO> addFishOrderDetailToOrder(@PathVariable String booking_id,
                                                               @PathVariable String farm_id,
-                                                              @RequestBody CreateOrderDTO dto){
-        FishOrder addedOrder = orderService.addFishPackOrFishOrderDetailToOrder(booking_id, farm_id, dto);
+                                                              @PathVariable String FishOrderDetailId_Or_FishPackOrderDetailId){
+        FishOrder addedOrder = orderService.addFishPackOrFishOrderDetailToOrder(booking_id, farm_id, FishOrderDetailId_Or_FishPackOrderDetailId);
         return ResponseEntity.ok(orderService.mapToDTO2(addedOrder));
     }
 
@@ -89,8 +89,18 @@ public class FishOrderController {
     }
 
     @GetMapping("/delivery-staff/{deliveryId}")
-    public ResponseEntity<?> getBookingsByCustomerId(@PathVariable String deliveryId) {
+    public ResponseEntity<?> getFishOrderByDeliveryId(@PathVariable String deliveryId) {
         List<DeliveryStaffOrderDTO> fishOrder = fishOrderService.getFishOrdersByDeliveryStaffId(deliveryId);
+        if (fishOrder.isEmpty()) {
+            ErrorDTO errorDTO = new ErrorDTO(404, "Order not found");
+            return ResponseEntity.status(404).body(errorDTO);
+        }
+        return ResponseEntity.ok(fishOrder);
+    }
+
+    @GetMapping("/customer/{customerId}")
+    public ResponseEntity<?> getFishOrderByCustomerId(@PathVariable String customerId) {
+        List<FishOrderDTO> fishOrder = fishOrderService.getFishOrdersByCustomerId(customerId);
         if (fishOrder.isEmpty()) {
             ErrorDTO errorDTO = new ErrorDTO(404, "Order not found");
             return ResponseEntity.status(404).body(errorDTO);
